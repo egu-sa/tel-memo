@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特定技能×介護施設｜用語解説</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background: #f5f5f3; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem 4rem;
+}
+.container { max-width: 680px; margin: 0 auto; }
+.page-title { font-size: 20px; font-weight: 600; margin-bottom: 0.25rem; }
+.page-sub { font-size: 13px; color: #999; margin-bottom: 1.5rem; }
+.flow-label { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px;
+  border-radius: 999px; border: 1px solid #ddd; background: #fff;
+  font-size: 14px; color: #1a1a1a; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s; user-select: none;
+}
+.chip:hover { background: #f0f0ee; border-color: #bbb; }
+.chip.active { background: #e8f0fb; border-color: #6a9de0; color: #1a4a8a; font-weight: 500; }
+.step-num {
+  font-size: 10px; font-weight: 600; width: 17px; height: 17px;
+  border-radius: 50%; background: #eee; color: #999;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.chip.active .step-num { background: rgba(26,74,138,0.15); color: #1a4a8a; }
+.arrow { font-size: 13px; color: #ccc; flex-shrink: 0; }
+.detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
+.detail-wrap.open { max-height: 700px; }
+.detail-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 1.1rem 1.25rem; }
+.d-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.d-title { font-size: 17px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
+.close-btn {
+  width: 26px; height: 26px; border-radius: 50%; background: #f0f0ee;
+  border: none; cursor: pointer; color: #888; font-size: 13px;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.close-btn:hover { background: #e0e0de; }
+.sales-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-top: 0.5rem; }
+.d-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-top: 0.4rem; }
+.divider { border: none; border-top: 1px solid #efefef; margin: 0.7rem 0; }
+.d-body { font-size: 14px; color: #555; line-height: 1.85; }
+.d-body strong { color: #1a1a1a; font-weight: 600; }
+.country-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
+.country-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: #f5f5f3; border: 1px solid #e5e5e3; }
+.country-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
+.country-note { font-size: 11px; color: #999; margin-top: 1px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="page-title">特定技能 × 介護施設</div>
+  <div class="page-sub">タップすると詳細が表示されます</div>
+  <div class="flow-label">テレアポスクリプトの流れ順</div>
+  <div class="chips" id="chips-area"></div>
+  <div class="detail-wrap" id="detail-wrap">
+    <div class="detail-card">
+      <div class="d-header">
+        <div class="d-title" id="d-title"></div>
+        <button class="close-btn" onclick="closeDetail()">✕</button>
+      </div>
+      <div id="d-badge-area"></div>
+      <hr class="divider">
+      <div class="d-body" id="d-body"></div>
+    </div>
+  </div>
+</div>
+<script>
+const TERMS = [
+  {
+    id: "tokutei", label: "特定技能",
+    badge: "在留資格", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
+    title: "特定技能（とくていぎのう）",
+    body: "深刻な人手不足を解消するために国が作った在留資格。<br><br><strong>対象</strong>：ある程度のスキルと日本語力を持つ外国人<br><strong>在留期間</strong>：最長 5年間<br><strong>位置づけ</strong>：「即戦力」として採用可能。日本人と同等の業務ができる。<br><br><strong>紹介可能な国籍（4カ国）</strong>",
+    countries: [
+      { flag: "🇳🇵", name: "ネパール",     note: "勤勉・コミュニケーション力◎" },
+      { flag: "🇮🇩", name: "インドネシア", note: "介護大国・即戦力が多い" },
+      { flag: "🇻🇳", name: "ベトナム",     note: "日本語学習への熱意が高い" },
+      { flag: "🇲🇲", name: "ミャンマー",   note: "真面目・定着率が高い傾向" },
+    ]
+  },
+  { id: "tokuyo", label: "特養", badge: "施設種別", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", salesTag: "ニーズ極めて高い", salesBg: "#FCEBEB", salesColor: "#A32D2D", title: "特養（とくよう）｜特別養護老人ホーム", body: "<strong>正式名称</strong>：特別養護老人ホーム<br><br>要介護度が高い方が入居し、看取りまで行う施設。<br><br><strong>営業での狙い目</strong>：常に激務で慢性的な人手不足。<strong>特定技能のニーズが極めて高く、最も成約につながりやすい施設種別。</strong>" },
+  { id: "roken", label: "老健", badge: "施設種別", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "夜勤負担が課題", salesBg: "#FAEEDA", salesColor: "#633806", title: "老健（ろうけん）｜介護老人保健施設", body: "<strong>正式名称</strong>：介護老人保健施設<br><br>病院退院後、自宅に戻るためのリハビリを行う施設。<br><br><strong>営業での狙い目</strong>：医療ケアが多く、夜勤の負担が大きい。夜勤対応できる人材を求めているケースが多い。" },
+  { id: "sakoju", label: "サ高住", badge: "施設種別", badgeBg: "#E1F5EE", badgeColor: "#085041", salesTag: "採用意欲が高い法人多い", salesBg: "#E1F5EE", salesColor: "#085041", title: "サ高住（さこうじゅう）｜サービス付き高齢者向け住宅", body: "<strong>正式名称</strong>：サービス付き高齢者向け住宅<br><br>比較的元気な高齢者が住む賃貸住宅型の施設。介護度は低め。<br><br><strong>営業での狙い目</strong>：施設展開のスピードが早く、複数拠点を持つ法人が多い。採用意欲が高く、まとめての紹介につながる可能性がある。" },
+  { id: "grouphome", label: "グループホーム", badge: "施設種別", badgeBg: "#EEEDFE", badgeColor: "#3C3489", salesTag: "日本語力が特に重視", salesBg: "#EEEDFE", salesColor: "#3C3489", title: "グループホーム｜認知症対応型共同生活介護", body: "<strong>正式名称</strong>：認知症対応型共同生活介護<br><br>認知症の方が少人数で共同生活を送る施設。<br><br><strong>営業での狙い目</strong>：コミュニケーション能力（日本語力）が特に重視される傾向にある。N3以上の人材を紹介できる点を強調すると刺さりやすい。" },
+  { id: "day", label: "デイ", badge: "施設種別", badgeBg: "#F1EFE8", badgeColor: "#444441", salesTag: "緊急度はやや低め", salesBg: "#F1EFE8", salesColor: "#5F5E5A", title: "デイ（サービス）｜通所介護", body: "<strong>正式名称</strong>：通所介護<br><br>日中のみ施設に通う形式の介護サービス。<br><br><strong>営業での狙い目</strong>：夜勤がないため、人員の緊急度は特養などと比べると一段落ちる場合が多い。ただし日中の人手不足は存在するため、提案の余地はある。" },
+  { id: "shoninsha", label: "初任者研修", badge: "介護資格｜入門", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "介護職員 初任者研修（旧：ヘルパー2級）", body: "介護資格の入門レベル。この資格を持つ人材も紹介可能。<br><br><strong>内容</strong>：入浴・食事・排泄介助などの基礎的な身体介護ができるようになる研修。<br><br>未経験から介護を始めた外国人材が最初に取得するケースが多い。" },
+  { id: "jitsumu", label: "実務者研修", badge: "介護資格｜中級", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "実務者研修", body: "介護資格の中級レベル。この資格を持つ人材も紹介可能。<br><br><strong>重要ポイント</strong>：この研修を修了しないと、介護福祉士（国家資格）の受験資格が得られない。<br><br>働きながら取得するケースが多く、キャリアアップを目指す意識の高い人材が保有していることが多い。" },
+  { id: "ninchisho", label: "認知症介護基礎研修", badge: "法律上の義務", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "認知症介護 基礎研修", body: "<strong>無資格で入職した場合、入社後1年以内の受講が法律で義務づけられている研修。</strong><br><br>認知症の方への正しい対応・コミュニケーション技術を学ぶ内容。<br><br><strong>施設側の対応が必要なケース</strong>：紹介する外国人材がこの研修を未受講の場合、入社後に受講させる義務が施設側に発生する。" },
+  { id: "n1", label: "N1", badge: "最高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N1（日本語能力試験）", body: "JLPTの最高レベル。ほぼネイティブに近い日本語力。<br><br><strong>N1のレベル感</strong>：ニュース・新聞・専門的な文章も理解できる。敬語や微妙なニュアンスも把握できる。<br><br>介護現場では過剰スペックになるケースもあるが、施設側の安心感は最大。リーダー候補・将来の中核人材として訴求できる。" },
+  { id: "n2", label: "N2", badge: "高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N2（日本語能力試験）", body: "日常会話はもちろん、やや専門的な内容まで理解できるレベル。<br><br><strong>N2のレベル感</strong>：自然な速さの会話でもほぼ問題なく対応できる。敬語もある程度使いこなせる。<br><br>N3より一段上の安心感があり、施設からの評価が高い。N1ほど稀少でなく、紹介できる人材も一定数いる。" },
+  { id: "n3", label: "N3", badge: "施設が最も好むレベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N3（日本語能力試験）", body: "JLPTはN1〜N5の5段階でN1が最高レベル。<br><br><strong>N3のレベル感</strong>：日常会話が問題なくできる。利用者様やスタッフとのやり取りがスムーズ。<br><br>施設からの信頼・安心感が最も高く、採用後のトラブルも少ない傾向がある。" },
+  { id: "n4", label: "N4", badge: "特定技能の最低条件", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N4（日本語能力試験）", body: "<strong>特定技能ビザを取得するための最低条件となる日本語レベル。</strong><br><br><strong>N4のレベル感</strong>：ゆっくり・やさしい日本語であれば基本的な会話が可能。業務指示の理解には問題ない。<br><br>N3と比べると施設側の安心感はやや下がるため、トークでは「N3以上が多い」という点を強調するとよい。" },
+  { id: "shokai", label: "紹介費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "紹介費", body: "人材を施設にご紹介する際の手数料（一括払い）。<br><br><strong>プランA（紹介＋委託）</strong>：150,000円<br><strong>プランB（紹介のみ）</strong>：200,000円<br><br>プランBは委託費が発生しない代わりに、紹介費が高くなる設計。" },
+  { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "特定技能外国人を受け入れる施設に代わって、弊社が行う継続サポートの費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>委託内容</strong><br>・日常生活支援（住居・銀行・交通手続きなど）<br>・行政手続きサポート（在留資格の更新など）<br>・トラブル発生時の一次窓口対応" },
+];
+
+let activeId = null;
+const area = document.getElementById('chips-area');
+const detailWrap = document.getElementById('detail-wrap');
+
+TERMS.forEach((item, i) => {
+  if (i > 0) {
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.textContent = '›';
+    area.appendChild(arrow);
+  }
+  const chip = document.createElement('div');
+  chip.className = 'chip';
+  chip.id = 'chip-' + item.id;
+  const num = document.createElement('span');
+  num.className = 'step-num';
+  num.textContent = i + 1;
+  chip.appendChild(num);
+  chip.appendChild(document.createTextNode(item.label));
+  chip.addEventListener('click', () => toggle(item));
+  area.appendChild(chip);
+});
+
+function toggle(item) {
+  if (activeId === item.id) { closeDetail(); return; }
+  activeId = item.id;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  document.getElementById('chip-' + item.id).classList.add('active');
+  document.getElementById('d-title').textContent = item.title;
+  const ba = document.getElementById('d-badge-area');
+  ba.innerHTML = '';
+  if (item.salesTag) {
+    const st = document.createElement('span');
+    st.className = 'sales-tag';
+    st.textContent = '営業ポイント：' + item.salesTag;
+    st.style.background = item.salesBg;
+    st.style.color = item.salesColor;
+    ba.appendChild(st);
+    ba.appendChild(document.createElement('br'));
+  }
+  if (item.badge) {
+    const b = document.createElement('span');
+    b.className = 'd-badge';
+    b.textContent = item.badge;
+    b.style.background = item.badgeBg;
+    b.style.color = item.badgeColor;
+    ba.appendChild(b);
+  }
+  const body = document.getElementById('d-body');
+  body.innerHTML = item.body;
+  if (item.countries) {
+    const row = document.createElement('div');
+    row.className = 'country-row';
+    item.countries.forEach(c => {
+      const pill = document.createElement('div');
+      pill.className = 'country-pill';
+      pill.innerHTML = '<span style="font-size:20px;line-height:1">' + c.flag + '</span><div><div class="country-name">' + c.name + '</div><div class="country-note">' + c.note + '</div></div>';
+      row.appendChild(pill);
+    });
+    body.appendChild(row);
+  }
+  detailWrap.classList.add('open');
+  setTimeout(() => detailWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+
+function closeDetail() {
+  activeId = null;
+  detailWrap.classList.remove('open');
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+}
+</script>
+</body>
+</html>
