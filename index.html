@@ -30,8 +30,8 @@ body {
 }
 .chip.active .step-num { background: rgba(26,74,138,0.15); color: #1a4a8a; }
 .arrow { font-size: 13px; color: #ccc; flex-shrink: 0; }
-.detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
-.detail-wrap.open { max-height: 700px; }
+.detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
+.detail-wrap.open { max-height: 1200px; }
 .detail-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 1.1rem 1.25rem; }
 .d-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
 .d-title { font-size: 17px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
@@ -46,6 +46,8 @@ body {
 .divider { border: none; border-top: 1px solid #efefef; margin: 0.7rem 0; }
 .d-body { font-size: 14px; color: #555; line-height: 1.85; }
 .d-body strong { color: #1a1a1a; font-weight: 600; }
+.d-body ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+.d-body ol li { margin-bottom: 0.5rem; }
 .country-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
 .country-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: #f5f5f3; border: 1px solid #e5e5e3; }
 .country-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
@@ -96,8 +98,15 @@ const TERMS = [
   { id: "n2", label: "N2", badge: "高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N2（日本語能力試験）", body: "日常会話はもちろん、やや専門的な内容まで理解できるレベル。<br><br><strong>N2のレベル感</strong>：自然な速さの会話でもほぼ問題なく対応できる。敬語もある程度使いこなせる。<br><br>N3より一段上の安心感があり、施設からの評価が高い。N1ほど稀少でなく、紹介できる人材も一定数いる。" },
   { id: "n3", label: "N3", badge: "施設が最も好むレベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N3（日本語能力試験）", body: "JLPTはN1〜N5の5段階でN1が最高レベル。<br><br><strong>N3のレベル感</strong>：日常会話が問題なくできる。利用者様やスタッフとのやり取りがスムーズ。<br><br>施設からの信頼・安心感が最も高く、採用後のトラブルも少ない傾向がある。" },
   { id: "n4", label: "N4", badge: "特定技能の最低条件", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N4（日本語能力試験）", body: "<strong>特定技能ビザを取得するための最低条件となる日本語レベル。</strong><br><br><strong>N4のレベル感</strong>：ゆっくり・やさしい日本語であれば基本的な会話が可能。業務指示の理解には問題ない。<br><br>N3と比べると施設側の安心感はやや下がるため、トークでは「N3以上が多い」という点を強調するとよい。" },
+  {
+    id: "toroku", label: "登録支援業務",
+    badge: "委託サービス内容", badgeBg: "#E1F5EE", badgeColor: "#085041",
+    salesTag: "委託費で弊社が全て代行", salesBg: "#E1F5EE", salesColor: "#085041",
+    title: "登録支援業務（とうろくしえんぎょうむ）",
+    body: "特定技能の外国人を雇う企業に<strong>法律で義務付けられている</strong>、外国人が日本でスムーズに生活・就労するためのサポート対応全般。<br><br>本来は施設側が対応しなければならないが、<strong>弊社が委託費（15,000円/月）で全て代行する。</strong><br><br><strong>具体的な業務内容（全10項目）</strong><ol><li><strong>事前ガイダンス</strong>：入国前に労働条件や日本の生活を説明</li><li><strong>出入国の送迎</strong>：入国・帰国時の空港〜住居間の送迎</li><li><strong>住居確保・契約支援</strong>：アパート探し・銀行口座・携帯・光熱費の契約サポート</li><li><strong>生活オリエンテーション</strong>：ゴミの出し方・交通ルール・買い物など日本の生活ルールを説明</li><li><strong>公的手続きの同行</strong>：市役所での住民登録・マイナンバー・税金手続きに同行・通訳</li><li><strong>日本語学習の機会提供</strong>：日本語教室の案内・学習教材の提供</li><li><strong>相談・苦情への対応</strong>：仕事や生活の悩みを母国語で受け付け、トラブルに対応</li><li><strong>日本人との交流促進</strong>：地域の行事・お祭りなどへの参加サポート</li><li><strong>転職支援</strong>：会社都合で解雇する場合などに次の就職先を探すサポート</li><li><strong>定期面談</strong>：3ヶ月に1回以上、外国人本人・直属上司と面談を実施</li></ol>"
+  },
   { id: "shokai", label: "紹介費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "紹介費", body: "人材を施設にご紹介する際の手数料（一括払い）。<br><br><strong>プランA（紹介＋委託）</strong>：150,000円<br><strong>プランB（紹介のみ）</strong>：200,000円<br><br>プランBは委託費が発生しない代わりに、紹介費が高くなる設計。" },
-  { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "特定技能外国人を受け入れる施設に代わって、弊社が行う継続サポートの費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>委託内容</strong><br>・日常生活支援（住居・銀行・交通手続きなど）<br>・行政手続きサポート（在留資格の更新など）<br>・トラブル発生時の一次窓口対応" },
+  { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "登録支援業務を施設に代わって弊社が代行するための費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>代行内容</strong>：登録支援業務の全10項目（事前ガイダンス・住居確保・公的手続き同行・定期面談など）をすべて対応。施設側の負担をゼロにする。" },
 ];
 
 let activeId = null;
