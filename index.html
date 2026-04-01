@@ -23,12 +23,15 @@ body {
 }
 .chip:hover { background: #f0f0ee; border-color: #bbb; }
 .chip.active { background: #e8f0fb; border-color: #6a9de0; color: #1a4a8a; font-weight: 500; }
+.chip.star { border-color: #f5c97a; background: #fffbf0; }
+.chip.star.active { background: #fef3e2; border-color: #f5a623; color: #7a5c1e; }
 .step-num {
   font-size: 10px; font-weight: 600; width: 17px; height: 17px;
   border-radius: 50%; background: #eee; color: #999;
   display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .chip.active .step-num { background: rgba(26,74,138,0.15); color: #1a4a8a; }
+.chip.star.active .step-num { background: rgba(245,166,35,0.2); color: #7a5c1e; }
 .arrow { font-size: 13px; color: #ccc; flex-shrink: 0; }
 .detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
 .detail-wrap.open { max-height: 1200px; }
@@ -48,6 +51,19 @@ body {
 .d-body strong { color: #1a1a1a; font-weight: 600; }
 .d-body ol { padding-left: 1.2rem; margin-top: 0.5rem; }
 .d-body ol li { margin-bottom: 0.5rem; }
+.spec-card {
+  background: #fffbf0; border: 1px solid #f5c97a; border-radius: 10px;
+  padding: 0.85rem 1rem; margin-top: 0.75rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+}
+.spec-item { display: flex; flex-direction: column; gap: 2px; }
+.spec-label { font-size: 10px; font-weight: 600; color: #b8870a; text-transform: uppercase; letter-spacing: 0.05em; }
+.spec-value { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+.script-box {
+  background: #f0f8f4; border: 1px solid #7fd0b5; border-radius: 10px;
+  padding: 0.85rem 1rem; margin-top: 0.85rem; font-size: 13px; color: #1a4a35; line-height: 1.8;
+}
+.script-label { font-size: 10px; font-weight: 600; color: #0f6e56; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
 .country-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
 .country-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: #f5f5f3; border: 1px solid #e5e5e3; }
 .country-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
@@ -86,6 +102,20 @@ const TERMS = [
       { flag: "🇲🇲", name: "ミャンマー",   note: "真面目・定着率が高い傾向" },
     ]
   },
+  {
+    id: "maxspec", label: "最高スペック人材", star: true,
+    badge: "トークの起点", badgeBg: "#FAEEDA", badgeColor: "#633806",
+    salesTag: "どんな人がいるの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
+    title: "紹介できる最高スペックの人材",
+    body: "「どんな人がいるんですか？」と聞かれたときの返し。最高スペックで話すことで施設側の期待値を最大化する。",
+    spec: [
+      { label: "日本語力", value: "JLPT N2" },
+      { label: "介護経験", value: "特養・老健" },
+      { label: "資格",     value: "実務者研修修了" },
+      { label: "在留期間", value: "最長5年" },
+    ],
+    script: "「たとえば弊社でご紹介できる方の中には、特養や老健での介護経験があり、実務者研修も修了済み、日本語はN2レベルという方もいらっしゃいます。最長5年間、即戦力として働いていただけます。」"
+  },
   { id: "tokuyo", label: "特養", badge: "施設種別", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", salesTag: "ニーズ極めて高い", salesBg: "#FCEBEB", salesColor: "#A32D2D", title: "特養（とくよう）｜特別養護老人ホーム", body: "<strong>正式名称</strong>：特別養護老人ホーム<br><br>要介護度が高い方が入居し、看取りまで行う施設。<br><br><strong>営業での狙い目</strong>：常に激務で慢性的な人手不足。<strong>特定技能のニーズが極めて高く、最も成約につながりやすい施設種別。</strong>" },
   { id: "roken", label: "老健", badge: "施設種別", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "夜勤負担が課題", salesBg: "#FAEEDA", salesColor: "#633806", title: "老健（ろうけん）｜介護老人保健施設", body: "<strong>正式名称</strong>：介護老人保健施設<br><br>病院退院後、自宅に戻るためのリハビリを行う施設。<br><br><strong>営業での狙い目</strong>：医療ケアが多く、夜勤の負担が大きい。夜勤対応できる人材を求めているケースが多い。" },
   { id: "sakoju", label: "サ高住", badge: "施設種別", badgeBg: "#E1F5EE", badgeColor: "#085041", salesTag: "採用意欲が高い法人多い", salesBg: "#E1F5EE", salesColor: "#085041", title: "サ高住（さこうじゅう）｜サービス付き高齢者向け住宅", body: "<strong>正式名称</strong>：サービス付き高齢者向け住宅<br><br>比較的元気な高齢者が住む賃貸住宅型の施設。介護度は低め。<br><br><strong>営業での狙い目</strong>：施設展開のスピードが早く、複数拠点を持つ法人が多い。採用意欲が高く、まとめての紹介につながる可能性がある。" },
@@ -107,6 +137,14 @@ const TERMS = [
   },
   { id: "shokai", label: "紹介費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "紹介費", body: "人材を施設にご紹介する際の手数料（一括払い）。<br><br><strong>プランA（紹介＋委託）</strong>：150,000円<br><strong>プランB（紹介のみ）</strong>：200,000円<br><br>プランBは委託費が発生しない代わりに、紹介費が高くなる設計。" },
   { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "登録支援業務を施設に代わって弊社が代行するための費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>代行内容</strong>：登録支援業務の全10項目（事前ガイダンス・住居確保・公的手続き同行・定期面談など）をすべて対応。施設側の負担をゼロにする。" },
+  {
+    id: "apo", label: "アポの内容", star: true,
+    badge: "クロージング", badgeBg: "#FAEEDA", badgeColor: "#633806",
+    salesTag: "アポはどんな話するの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
+    title: "アポでどんな話をするか",
+    body: "アポの目的は<strong>「求人票の確認」と「候補人材のご提案」</strong>。<br><br>訪問前に施設の求人票を確認し、特定技能に合った人材を数名ピックアップしてから伺う。",
+    script: "「求人票って、特定技能用に作られてますかね？」<br><br>↓ <strong>作られていない・よくわからない場合</strong><br><br>「でしたら、詳細を少し教えていただければ、こちらでも良さそうな方を何人かピックアップしておきます。〇〇日の〇〇時はいかがでしょうか？」"
+  },
 ];
 
 let activeId = null;
@@ -121,7 +159,7 @@ TERMS.forEach((item, i) => {
     area.appendChild(arrow);
   }
   const chip = document.createElement('div');
-  chip.className = 'chip';
+  chip.className = 'chip' + (item.star ? ' star' : '');
   chip.id = 'chip-' + item.id;
   const num = document.createElement('span');
   num.className = 'step-num';
@@ -138,6 +176,7 @@ function toggle(item) {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   document.getElementById('chip-' + item.id).classList.add('active');
   document.getElementById('d-title').textContent = item.title;
+
   const ba = document.getElementById('d-badge-area');
   ba.innerHTML = '';
   if (item.salesTag) {
@@ -157,8 +196,29 @@ function toggle(item) {
     b.style.color = item.badgeColor;
     ba.appendChild(b);
   }
+
   const body = document.getElementById('d-body');
   body.innerHTML = item.body;
+
+  if (item.spec) {
+    const card = document.createElement('div');
+    card.className = 'spec-card';
+    item.spec.forEach(s => {
+      const si = document.createElement('div');
+      si.className = 'spec-item';
+      si.innerHTML = '<div class="spec-label">' + s.label + '</div><div class="spec-value">' + s.value + '</div>';
+      card.appendChild(si);
+    });
+    body.appendChild(card);
+  }
+
+  if (item.script) {
+    const sb = document.createElement('div');
+    sb.className = 'script-box';
+    sb.innerHTML = '<div class="script-label">トーク例</div>' + item.script;
+    body.appendChild(sb);
+  }
+
   if (item.countries) {
     const row = document.createElement('div');
     row.className = 'country-row';
@@ -170,6 +230,7 @@ function toggle(item) {
     });
     body.appendChild(row);
   }
+
   detailWrap.classList.add('open');
   setTimeout(() => detailWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 }
