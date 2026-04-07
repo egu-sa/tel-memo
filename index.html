@@ -68,6 +68,33 @@ body {
 .country-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: #f5f5f3; border: 1px solid #e5e5e3; }
 .country-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
 .country-note { font-size: 11px; color: #999; margin-top: 1px; }
+
+.section-divider { border: none; border-top: 2px solid #e0e0e0; margin: 2rem 0 1.5rem; }
+.section-title { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
+.section-sub { font-size: 12px; color: #999; margin-bottom: 1rem; }
+.action-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.action-chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px;
+  border-radius: 999px; border: 1px solid #ddd; background: #fff;
+  font-size: 14px; color: #1a1a1a; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s; user-select: none;
+}
+.action-chip:hover { background: #f0f0ee; border-color: #bbb; }
+.action-chip.active { background: #f0faf5; border-color: #43b89c; color: #085041; font-weight: 500; }
+.action-num {
+  font-size: 10px; font-weight: 600; width: 17px; height: 17px;
+  border-radius: 50%; background: #eee; color: #999;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.action-chip.active .action-num { background: rgba(15,110,86,0.12); color: #085041; }
+.action-detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
+.action-detail-wrap.open { max-height: 1400px; }
+.format-box {
+  background: #f8f8f6; border: 1px solid #ddd; border-radius: 10px;
+  padding: 0.85rem 1rem; margin-top: 0.85rem;
+  font-size: 12.5px; color: #333; line-height: 1.85; white-space: pre-wrap; font-family: inherit;
+}
+.format-label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
 </style>
 </head>
 <body>
@@ -85,6 +112,22 @@ body {
       <div id="d-badge-area"></div>
       <hr class="divider">
       <div class="d-body" id="d-body"></div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+  <div class="section-title">アポ後のアクション</div>
+  <div class="section-sub">アポ獲得後に順番どおりにこなすチェックリスト</div>
+  <div class="action-chips" id="action-chips"></div>
+  <div class="action-detail-wrap" id="action-detail-wrap">
+    <div class="detail-card">
+      <div class="d-header">
+        <div class="d-title" id="a-title"></div>
+        <button class="close-btn" onclick="closeAction()">✕</button>
+      </div>
+      <div id="a-badge-area"></div>
+      <hr class="divider">
+      <div class="d-body" id="a-body"></div>
     </div>
   </div>
 </div>
@@ -239,6 +282,141 @@ function closeDetail() {
   activeId = null;
   detailWrap.classList.remove('open');
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+}
+
+const ACTIONS = [
+  {
+    id: "status", label: "リスト更新",
+    badge: "テレアポリスト", badgeBg: "#E1F5EE", badgeColor: "#085041",
+    title: "テレアポリストのステータス更新",
+    body: "テレアポリストを開き、今回アポを獲得した施設のステータスを<strong>「アポ獲得」</strong>に変更する。"
+  },
+  {
+    id: "crm", label: "CRM入力",
+    badge: "顧客管理", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
+    title: "顧客管理CRM入力",
+    body: "テレアポ中に聞いた情報をCRMに入力する。<br><br><strong>入力項目</strong><br>・会社名<br>・担当者名<br>・メールアドレス<br>・電話番号<br>・アポ日時<br>・その他メモ（ニーズ・懸念点など）"
+  },
+  {
+    id: "calendar", label: "カレンダー登録",
+    badge: "スケジュール", badgeBg: "#EEEDFE", badgeColor: "#3C3489",
+    title: "カレンダーに商談内容を記録",
+    body: "Googleカレンダーにアポの予定を登録し、以下のフォーマットで商談メモを記載する。",
+    format: `＜ランク＞C
+例）会社としては人を増やす余地がある。それよりはTanceeが信頼に足るのかどうかを重要視している。
+
+＜先方について＞047-303-7711  担当：マツバラ様
+
+＜どんな商談を期待しているか（アポをくれた理由）＞
+信頼をすごく気にしていて、何かあった時にすぐに対応してくれるのか。紹介料15万円でそこをどのようにして機能させているのか。を気にしている。
+
+＜前提＞
+webページも見られていて、実績・信頼を重要視している。
+
+＜人材要件＞
+あまり聞けてないが、会社としては拡大の余地あり。
+
+＜今後について＞
+信頼と実績で他社と差別化できると良さそう。`
+  },
+  {
+    id: "slack", label: "Slack報告",
+    badge: "チーム共有", badgeBg: "#FAEEDA", badgeColor: "#633806",
+    title: "Slackでアポ獲得を報告",
+    body: "アポ獲得をSlackで報告する。以下のフォーマットを参考に。",
+    format: `2026/04/15 11:00- オンラインにて特定技能のアポ獲得しました！
+今度は30分時間もらえました笑
+ランクはCですね。求人はもらえるかどうか怪しいです。今年は充足してるとのことだったので。
+会社名：医療法人泰一会 介護老人保健施設はつかり　ヒダカ様`
+  },
+  {
+    id: "meet", label: "Meetリンク取得",
+    badge: "オンライン商談", badgeBg: "#E1F5EE", badgeColor: "#085041",
+    title: "Google MeetリンクをまさやさんにもらうMTGリンクを取得する",
+    body: "<strong>まさやさんにGoogle Meetのリンクを取得してもらう。</strong><br><br>取得したリンクはメール送信時に使用する。"
+  },
+  {
+    id: "mail", label: "メール送信",
+    badge: "お礼メール", badgeBg: "#FCEBEB", badgeColor: "#A32D2D",
+    title: "アポのお礼メールを送信",
+    body: "Meetリンクをセットしてアポのお礼メールを送る。以下のフォーマットを参考に。",
+    format: `件名：【お礼とご連絡】4/16（木）11:00〜のお打ち合わせについて
+
+医療法人泰一会 介護老人保健施設はつかり ヒダカ様
+
+お世話になります。株式会社Tanceeの三枝と申します。
+
+先ほどはお忙しい中、お電話にてお時間をいただき誠にありがとうございました。
+お電話口でもお話しさせていただいた通り、下記の日程にてお打ち合わせさせていただきたく存じます。
+詳細を以下の通り設定いたしましたので、ご確認の程よろしくお願いいたします。
+
+■日時　4月16日（木）11:00〜
+■ミーティングURL　https://meet.google.com/xxx-xxxx-xxx
+
+当日は何卒よろしくお願い申し上げます。
+株式会社 Tancee　三枝`
+  },
+];
+
+let activeActionId = null;
+const actionArea = document.getElementById('action-chips');
+const actionDetailWrap = document.getElementById('action-detail-wrap');
+
+ACTIONS.forEach((item, i) => {
+  if (i > 0) {
+    const arrow = document.createElement('span');
+    arrow.className = 'arrow';
+    arrow.textContent = '›';
+    actionArea.appendChild(arrow);
+  }
+  const chip = document.createElement('div');
+  chip.className = 'action-chip';
+  chip.id = 'action-chip-' + item.id;
+  const num = document.createElement('span');
+  num.className = 'action-num';
+  num.textContent = i + 1;
+  chip.appendChild(num);
+  chip.appendChild(document.createTextNode(item.label));
+  chip.addEventListener('click', () => toggleAction(item));
+  actionArea.appendChild(chip);
+});
+
+function toggleAction(item) {
+  if (activeActionId === item.id) { closeAction(); return; }
+  activeActionId = item.id;
+  document.querySelectorAll('.action-chip').forEach(c => c.classList.remove('active'));
+  document.getElementById('action-chip-' + item.id).classList.add('active');
+  document.getElementById('a-title').textContent = item.title;
+
+  const ba = document.getElementById('a-badge-area');
+  ba.innerHTML = '';
+  if (item.badge) {
+    const b = document.createElement('span');
+    b.className = 'd-badge';
+    b.textContent = item.badge;
+    b.style.background = item.badgeBg;
+    b.style.color = item.badgeColor;
+    ba.appendChild(b);
+  }
+
+  const body = document.getElementById('a-body');
+  body.innerHTML = item.body;
+
+  if (item.format) {
+    const fb = document.createElement('div');
+    fb.className = 'format-box';
+    fb.innerHTML = '<div class="format-label">フォーマット</div>' + item.format.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    body.appendChild(fb);
+  }
+
+  actionDetailWrap.classList.add('open');
+  setTimeout(() => actionDetailWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+
+function closeAction() {
+  activeActionId = null;
+  actionDetailWrap.classList.remove('open');
+  document.querySelectorAll('.action-chip').forEach(c => c.classList.remove('active'));
 }
 </script>
 </body>
