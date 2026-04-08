@@ -13,8 +13,13 @@ body {
 .container { max-width: 680px; margin: 0 auto; }
 .page-title { font-size: 20px; font-weight: 600; margin-bottom: 0.25rem; }
 .page-sub { font-size: 13px; color: #999; margin-bottom: 1.5rem; }
-.flow-label { font-size: 11px; font-weight: 600; color: #aaa; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.75rem; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.section-divider { border: none; border-top: 2px solid #e0e0e0; margin: 2rem 0 1.25rem; }
+.section-title { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 0.2rem; }
+.section-sub { font-size: 12px; color: #999; margin-bottom: 1rem; }
+.group-label { font-size: 10px; font-weight: 600; color: #aaa; letter-spacing: 0.07em; text-transform: uppercase; margin: 1rem 0 0.5rem; }
+.group-label:first-child { margin-top: 0; }
+/* ── 汎用チップ ── */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px;
   border-radius: 999px; border: 1px solid #ddd; background: #fff;
@@ -25,16 +30,10 @@ body {
 .chip.active { background: #e8f0fb; border-color: #6a9de0; color: #1a4a8a; font-weight: 500; }
 .chip.star { border-color: #f5c97a; background: #fffbf0; }
 .chip.star.active { background: #fef3e2; border-color: #f5a623; color: #7a5c1e; }
-.step-num {
-  font-size: 10px; font-weight: 600; width: 17px; height: 17px;
-  border-radius: 50%; background: #eee; color: #999;
-  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.chip.active .step-num { background: rgba(26,74,138,0.15); color: #1a4a8a; }
-.chip.star.active .step-num { background: rgba(245,166,35,0.2); color: #7a5c1e; }
-.arrow { font-size: 13px; color: #ccc; flex-shrink: 0; }
+.chip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+/* ── 詳細カード ── */
 .detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
-.detail-wrap.open { max-height: 1200px; }
+.detail-wrap.open { max-height: 1400px; }
 .detail-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 14px; padding: 1.1rem 1.25rem; }
 .d-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
 .d-title { font-size: 17px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
@@ -44,13 +43,14 @@ body {
   display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .close-btn:hover { background: #e0e0de; }
-.sales-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-top: 0.5rem; }
+.sales-tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-top: 0.5rem; }
 .d-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; margin-top: 0.4rem; }
 .divider { border: none; border-top: 1px solid #efefef; margin: 0.7rem 0; }
 .d-body { font-size: 14px; color: #555; line-height: 1.85; }
 .d-body strong { color: #1a1a1a; font-weight: 600; }
 .d-body ol { padding-left: 1.2rem; margin-top: 0.5rem; }
 .d-body ol li { margin-bottom: 0.5rem; }
+/* ── スペックカード・スクリプト ── */
 .spec-card {
   background: #fffbf0; border: 1px solid #f5c97a; border-radius: 10px;
   padding: 0.85rem 1rem; margin-top: 0.75rem;
@@ -59,41 +59,42 @@ body {
 .spec-item { display: flex; flex-direction: column; gap: 2px; }
 .spec-label { font-size: 10px; font-weight: 600; color: #b8870a; text-transform: uppercase; letter-spacing: 0.05em; }
 .spec-value { font-size: 15px; font-weight: 600; color: #1a1a1a; }
-.script-box {
-  background: #f0f8f4; border: 1px solid #7fd0b5; border-radius: 10px;
-  padding: 0.85rem 1rem; margin-top: 0.85rem; font-size: 13px; color: #1a4a35; line-height: 1.8;
-}
+.script-box { background: #f0f8f4; border: 1px solid #7fd0b5; border-radius: 10px; padding: 0.85rem 1rem; margin-top: 0.85rem; font-size: 13px; color: #1a4a35; line-height: 1.8; }
 .script-label { font-size: 10px; font-weight: 600; color: #0f6e56; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+/* ── 国籍 ── */
 .country-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.75rem; }
 .country-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 10px; background: #f5f5f3; border: 1px solid #e5e5e3; }
 .country-name { font-weight: 600; color: #1a1a1a; font-size: 13px; }
 .country-note { font-size: 11px; color: #999; margin-top: 1px; }
-
-.section-divider { border: none; border-top: 2px solid #e0e0e0; margin: 2rem 0 1.5rem; }
-.section-title { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 0.25rem; }
-.section-sub { font-size: 12px; color: #999; margin-bottom: 1rem; }
+/* ── ヒアリングリスト ── */
+.hearing-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.hearing-item { display: flex; align-items: flex-start; gap: 10px; }
+.hearing-num { min-width: 22px; height: 22px; border-radius: 50%; color: #fff; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hearing-wall { border-top: 1px dashed #e8e8e8; padding-top: 0.5rem; color: #aaa; font-size: 11px; text-align: center; }
+/* ── テレアポリスト用語（内部リスト） ── */
+.tele-list { display: flex; flex-direction: column; gap: 0.65rem; }
+.tele-item { display: flex; align-items: flex-start; gap: 10px; }
+.tele-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+/* ── アポ後アクションチップ ── */
 .action-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .action-chip {
   display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px;
-  border-radius: 999px; border: 1px solid #ddd; background: #fff;
-  font-size: 14px; color: #1a1a1a; cursor: pointer;
+  border-radius: 999px; border: 1px solid #b8dde6; background: #f0f8fa;
+  font-size: 14px; color: #085041; cursor: pointer;
   transition: background 0.15s, border-color 0.15s; user-select: none;
 }
-.action-chip:hover { background: #f0f0ee; border-color: #bbb; }
-.action-chip.active { background: #f0faf5; border-color: #43b89c; color: #085041; font-weight: 500; }
+.action-chip:hover { background: #dff0f5; border-color: #7fc8d8; }
+.action-chip.active { background: #0d8fad; border-color: #0d8fad; color: #fff; font-weight: 500; }
 .action-num {
-  font-size: 10px; font-weight: 600; width: 17px; height: 17px;
-  border-radius: 50%; background: #eee; color: #999;
+  font-size: 10px; font-weight: 700; width: 17px; height: 17px;
+  border-radius: 50%; background: rgba(0,0,0,0.12);
   display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.action-chip.active .action-num { background: rgba(15,110,86,0.12); color: #085041; }
+.arrow { font-size: 13px; color: #ccc; flex-shrink: 0; }
 .action-detail-wrap { margin-top: 1rem; overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
 .action-detail-wrap.open { max-height: 1400px; }
-.format-box {
-  background: #f8f8f6; border: 1px solid #ddd; border-radius: 10px;
-  padding: 0.85rem 1rem; margin-top: 0.85rem;
-  font-size: 12.5px; color: #333; line-height: 1.85; white-space: pre-wrap; font-family: inherit;
-}
+/* ── フォーマットボックス ── */
+.format-box { background: #f8f8f6; border: 1px solid #ddd; border-radius: 10px; padding: 0.85rem 1rem; margin-top: 0.85rem; font-size: 12.5px; color: #333; line-height: 1.85; white-space: pre-wrap; font-family: inherit; }
 .format-label { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
 </style>
 </head>
@@ -101,8 +102,11 @@ body {
 <div class="container">
   <div class="page-title">特定技能 × 介護施設</div>
   <div class="page-sub">タップすると詳細が表示されます</div>
-  <div class="flow-label">テレアポスクリプトの流れ順</div>
-  <div class="chips" id="chips-area"></div>
+
+  <!-- ① 業務に必要になる単語 -->
+  <div class="section-title">業務に必要になる単語</div>
+  <div class="section-sub">カテゴリごとに整理しています</div>
+  <div id="word-area"></div>
   <div class="detail-wrap" id="detail-wrap">
     <div class="detail-card">
       <div class="d-header">
@@ -115,6 +119,24 @@ body {
     </div>
   </div>
 
+  <!-- ② テレアポリスト用語 -->
+  <hr class="section-divider">
+  <div class="section-title">テレアポリスト用語</div>
+  <div class="section-sub">チップをタップすると詳細が表示されます</div>
+  <div class="chips" id="tele-chips"></div>
+  <div class="detail-wrap" id="tele-wrap">
+    <div class="detail-card">
+      <div class="d-header">
+        <div class="d-title" id="t-title"></div>
+        <button class="close-btn" onclick="closeTele()">✕</button>
+      </div>
+      <div id="t-badge-area"></div>
+      <hr class="divider">
+      <div class="d-body" id="t-body"></div>
+    </div>
+  </div>
+
+  <!-- ③ アポ後のアクション -->
   <hr class="section-divider">
   <div class="section-title">アポ後のアクション</div>
   <div class="section-sub">アポ獲得後に順番どおりにこなすチェックリスト</div>
@@ -131,232 +153,339 @@ body {
     </div>
   </div>
 </div>
+
 <script>
-const TERMS = [
+// ════════════════════════════════════════════════
+// ① 業務に必要になる単語
+// ════════════════════════════════════════════════
+const GROUPS = [
   {
-    id: "tokutei", label: "特定技能",
-    badge: "在留資格", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
-    title: "特定技能（とくていぎのう）",
-    body: "深刻な人手不足を解消するために国が作った在留資格。<br><br><strong>対象</strong>：ある程度のスキルと日本語力を持つ外国人<br><strong>在留期間</strong>：最長 5年間<br><strong>位置づけ</strong>：「即戦力」として採用可能。日本人と同等の業務ができる。<br><br><strong>紹介可能な国籍（4カ国）</strong>",
-    countries: [
-      { flag: "🇳🇵", name: "ネパール",     note: "勤勉・コミュニケーション力◎" },
-      { flag: "🇮🇩", name: "インドネシア", note: "介護大国・即戦力が多い" },
-      { flag: "🇻🇳", name: "ベトナム",     note: "日本語学習への熱意が高い" },
-      { flag: "🇲🇲", name: "ミャンマー",   note: "真面目・定着率が高い傾向" },
+    label: "基本情報",
+    dotColor: "#185FA5",
+    terms: [
+      {
+        id: "jigyou", label: "Tanceeの事業内容",
+        badge: "事業概要", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
+        title: "Tanceeの事業内容",
+        body: `<svg width='100%' viewBox='0 0 680 536'>
+<defs>
+<marker id='marr' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='6' markerHeight='6' orient='auto-start-reverse'><path d='M2 1L8 5L2 9' fill='none' stroke='context-stroke' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></marker>
+<marker id='marrw' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='7' markerHeight='7' orient='auto-start-reverse'><path d='M2 1L8 5L2 9' fill='none' stroke='#fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></marker>
+</defs>
+<style>
+.tct>rect{fill:#E1F5EE;stroke:#0F6E56;stroke-width:0.5}.tct text{fill:#085041}
+.tcb>rect{fill:#E6F1FB;stroke:#185FA5;stroke-width:0.5}.tcb text{fill:#0C447C}
+.tcg>rect{fill:#F1EFE8;stroke:#5F5E5A;stroke-width:0.5}.tcg text{fill:#444441}
+.tca>rect{fill:#FAEEDA;stroke:#BA7517;stroke-width:0.5}.tca text{fill:#633806}
+.tcp>rect{fill:#EEEDFE;stroke:#534AB7;stroke-width:0.5}.tcp text{fill:#3C3489}
+.tcgr>rect{fill:#EAF3DE;stroke:#3B6D11;stroke-width:0.5}.tcgr text{fill:#27500A}
+</style>
+<g class='tct'><rect x='36' y='14' width='220' height='192' rx='12'/><text x='146' y='36' text-anchor='middle' font-size='14' font-weight='500'>供給側</text></g>
+<g class='tcb'><rect x='50' y='48' width='192' height='42' rx='6'/><text x='146' y='66' text-anchor='middle' font-size='14' font-weight='500'>海外4カ国</text><text x='146' y='82' text-anchor='middle' font-size='12'>ネパール / インドネシア 他</text></g>
+<line x1='146' y1='90' x2='146' y2='104' stroke='#0F6E56' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcg'><rect x='50' y='106' width='192' height='32' rx='6'/><text x='146' y='122' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>提携先</text></g>
+<line x1='146' y1='138' x2='146' y2='152' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcg'><rect x='50' y='154' width='192' height='32' rx='6'/><text x='146' y='170' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>エージェント</text></g>
+<line x1='146' y1='186' x2='146' y2='230' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<text x='158' y='212' font-size='12' fill='#5F5E5A'>人材供給</text>
+<g class='tca'><rect x='50' y='232' width='192' height='56' rx='10'/><text x='146' y='256' text-anchor='middle' font-size='14' font-weight='500'>Tancee</text><text x='146' y='272' text-anchor='middle' font-size='12'>人材を保有・マッチング</text></g>
+<rect x='244' y='241' width='126' height='38' rx='8' fill='#D85A30'/>
+<line x1='248' y1='266' x2='364' y2='266' stroke='#fff' stroke-width='3' marker-end='url(#marrw)'/>
+<text x='306' y='256' text-anchor='middle' font-size='14' font-weight='500' fill='#fff'>テレアポ</text>
+<g class='tcg'><rect x='368' y='212' width='282' height='312' rx='12'/><text x='509' y='232' text-anchor='middle' font-size='14' font-weight='500'>介護施設への営業フロー</text></g>
+<g class='tcp'><rect x='380' y='242' width='258' height='40' rx='6'/><text x='509' y='258' text-anchor='middle' font-size='14' font-weight='500'>介護施設</text><text x='509' y='274' text-anchor='middle' font-size='12'>特養・老健・サ高住など</text></g>
+<line x1='509' y1='282' x2='509' y2='294' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcg'><rect x='380' y='296' width='258' height='32' rx='6'/><text x='509' y='312' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>アポ獲得</text></g>
+<line x1='509' y1='328' x2='509' y2='340' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcg'><rect x='380' y='342' width='258' height='32' rx='6'/><text x='509' y='358' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>商談</text></g>
+<line x1='509' y1='374' x2='509' y2='386' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcgr'><rect x='380' y='388' width='258' height='32' rx='6'/><text x='509' y='404' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>成約</text></g>
+<line x1='509' y1='420' x2='509' y2='432' stroke='#3B6D11' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tcg'><rect x='380' y='434' width='258' height='32' rx='6'/><text x='509' y='450' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>人材マッチング</text></g>
+<line x1='509' y1='466' x2='509' y2='478' stroke='#5F5E5A' stroke-width='1.5' marker-end='url(#marr)'/>
+<g class='tct'><rect x='380' y='480' width='258' height='32' rx='6'/><text x='509' y='496' text-anchor='middle' dominant-baseline='central' font-size='14' font-weight='500'>入職・登録支援（継続）</text></g>
+<path d='M244,272 L244,450 L378,450' fill='none' stroke='#1D9E75' stroke-width='1.5' stroke-dasharray='5 3' marker-end='url(#marr)'/>
+<text x='308' y='444' text-anchor='middle' font-size='12' fill='#085041'>人材</text>
+<path d='M378,404 L256,404 L256,272 L244,272' fill='none' stroke='#EF9F27' stroke-width='1.5' stroke-dasharray='4 3' marker-end='url(#marr)'/>
+<text x='314' y='398' text-anchor='middle' font-size='12' fill='#633806'>紹介費</text>
+</svg>`
+      },
+      {
+        id: "shiryo", label: "テレアポ関連資料",
+        badge: "リンク集", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
+        title: "テレアポ関連資料",
+        body: `<div style='display:flex;flex-direction:column;gap:10px;'>
+<a href='https://www.figma.com/board/EbHFZETQ0eo1mn38k08aVt/%E7%89%B9%E5%AE%9A%E6%8A%80%E8%83%BD%EF%BC%88%E4%BB%8B%E8%AD%B7%EF%BC%89%E3%83%86%E3%83%AC%E3%82%A2%E3%83%9D%EF%BC%9A%E3%83%95%E3%83%AD%E3%83%BC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%88?node-id=0-1&t=anOrUyAMmHkbVneJ-1' target='_blank' style='display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f5f5f3;border:1px solid #e0e0e0;border-radius:10px;text-decoration:none;color:#1a1a1a;font-size:14px;'>
+<span style='font-size:18px;'>&#128196;</span><div><div style='font-weight:600;'>トークスクリプト</div><div style='font-size:12px;color:#999;margin-top:2px;'>Figma フローチャート</div></div><span style='margin-left:auto;color:#bbb;font-size:12px;'>&#8599;</span></a>
+<a href='https://docs.google.com/spreadsheets/d/1SvAUC4jL74oxsjUYbuwrrQy95cqNKNXjvzdXFBH-rpY/edit?gid=0#gid=0' target='_blank' style='display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f5f5f3;border:1px solid #e0e0e0;border-radius:10px;text-decoration:none;color:#1a1a1a;font-size:14px;'>
+<span style='font-size:18px;'>&#128202;</span><div><div style='font-weight:600;'>テレアポリスト</div><div style='font-size:12px;color:#999;margin-top:2px;'>Google スプレッドシート</div></div><span style='margin-left:auto;color:#bbb;font-size:12px;'>&#8599;</span></a>
+<a href='https://docs.google.com/spreadsheets/d/106Vueo84Xnnu-p_p66cVKwg4juq3sWl6Ib2eSoykfwI/edit?gid=1598000076#gid=1598000076' target='_blank' style='display:flex;align-items:center;gap:10px;padding:12px 14px;background:#f5f5f3;border:1px solid #e0e0e0;border-radius:10px;text-decoration:none;color:#1a1a1a;font-size:14px;'>
+<span style='font-size:18px;'>&#9997;&#65039;</span><div><div style='font-weight:600;'>テレアポ入力シート</div><div style='font-size:12px;color:#999;margin-top:2px;'>Google スプレッドシート</div></div><span style='margin-left:auto;color:#bbb;font-size:12px;'>&#8599;</span></a>
+</div>`
+      },
     ]
   },
   {
-    id: "maxspec", label: "最高スペック人材", star: true,
-    badge: "トークの起点", badgeBg: "#FAEEDA", badgeColor: "#633806",
-    salesTag: "どんな人がいるの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
-    title: "紹介できる最高スペックの人材",
-    body: "「どんな人がいるんですか？」と聞かれたときの返し。最高スペックで話すことで施設側の期待値を最大化する。",
-    spec: [
-      { label: "日本語力", value: "JLPT N2" },
-      { label: "介護経験", value: "特養・老健" },
-      { label: "資格",     value: "実務者研修修了" },
-      { label: "在留期間", value: "最長5年" },
-    ],
-    script: "「たとえば弊社でご紹介できる方の中には、特養や老健での介護経験があり、実務者研修も修了済み、日本語はN2レベルという方もいらっしゃいます。最長5年間、即戦力として働いていただけます。」"
+    label: "制度・ビザ", dotColor: "#185FA5",
+    terms: [
+      { id: "tokutei", label: "特定技能", badge: "在留資格", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
+        title: "特定技能（とくていぎのう）",
+        body: "深刻な人手不足を解消するために国が作った在留資格。<br><br><strong>対象</strong>：ある程度のスキルと日本語力を持つ外国人<br><strong>在留期間</strong>：最長 5年間<br><strong>位置づけ</strong>：「即戦力」として採用可能。日本人と同等の業務ができる。<br><br><strong>紹介可能な国籍（4カ国）</strong>",
+        countries: [
+          { flag: "🇳🇵", name: "ネパール",     note: "勤勉・コミュニケーション力◎" },
+          { flag: "🇮🇩", name: "インドネシア", note: "介護大国・即戦力が多い" },
+          { flag: "🇻🇳", name: "ベトナム",     note: "日本語学習への熱意が高い" },
+          { flag: "🇲🇲", name: "ミャンマー",   note: "真面目・定着率が高い傾向" },
+        ]
+      },
+    ]
   },
-  { id: "tokuyo", label: "特養", badge: "施設種別", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", salesTag: "ニーズ極めて高い", salesBg: "#FCEBEB", salesColor: "#A32D2D", title: "特養（とくよう）｜特別養護老人ホーム", body: "<strong>正式名称</strong>：特別養護老人ホーム<br><br>要介護度が高い方が入居し、看取りまで行う施設。<br><br><strong>営業での狙い目</strong>：常に激務で慢性的な人手不足。<strong>特定技能のニーズが極めて高く、最も成約につながりやすい施設種別。</strong>" },
-  { id: "roken", label: "老健", badge: "施設種別", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "夜勤負担が課題", salesBg: "#FAEEDA", salesColor: "#633806", title: "老健（ろうけん）｜介護老人保健施設", body: "<strong>正式名称</strong>：介護老人保健施設<br><br>病院退院後、自宅に戻るためのリハビリを行う施設。<br><br><strong>営業での狙い目</strong>：医療ケアが多く、夜勤の負担が大きい。夜勤対応できる人材を求めているケースが多い。" },
-  { id: "sakoju", label: "サ高住", badge: "施設種別", badgeBg: "#E1F5EE", badgeColor: "#085041", salesTag: "採用意欲が高い法人多い", salesBg: "#E1F5EE", salesColor: "#085041", title: "サ高住（さこうじゅう）｜サービス付き高齢者向け住宅", body: "<strong>正式名称</strong>：サービス付き高齢者向け住宅<br><br>比較的元気な高齢者が住む賃貸住宅型の施設。介護度は低め。<br><br><strong>営業での狙い目</strong>：施設展開のスピードが早く、複数拠点を持つ法人が多い。採用意欲が高く、まとめての紹介につながる可能性がある。" },
-  { id: "grouphome", label: "グループホーム", badge: "施設種別", badgeBg: "#EEEDFE", badgeColor: "#3C3489", salesTag: "日本語力が特に重視", salesBg: "#EEEDFE", salesColor: "#3C3489", title: "グループホーム｜認知症対応型共同生活介護", body: "<strong>正式名称</strong>：認知症対応型共同生活介護<br><br>認知症の方が少人数で共同生活を送る施設。<br><br><strong>営業での狙い目</strong>：コミュニケーション能力（日本語力）が特に重視される傾向にある。N3以上の人材を紹介できる点を強調すると刺さりやすい。" },
-  { id: "day", label: "デイ", badge: "施設種別", badgeBg: "#F1EFE8", badgeColor: "#444441", salesTag: "緊急度はやや低め", salesBg: "#F1EFE8", salesColor: "#5F5E5A", title: "デイ（サービス）｜通所介護", body: "<strong>正式名称</strong>：通所介護<br><br>日中のみ施設に通う形式の介護サービス。<br><br><strong>営業での狙い目</strong>：夜勤がないため、人員の緊急度は特養などと比べると一段落ちる場合が多い。ただし日中の人手不足は存在するため、提案の余地はある。" },
-  { id: "shoninsha", label: "初任者研修", badge: "介護資格｜入門", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "介護職員 初任者研修（旧：ヘルパー2級）", body: "介護資格の入門レベル。この資格を持つ人材も紹介可能。<br><br><strong>内容</strong>：入浴・食事・排泄介助などの基礎的な身体介護ができるようになる研修。<br><br>未経験から介護を始めた外国人材が最初に取得するケースが多い。" },
-  { id: "jitsumu", label: "実務者研修", badge: "介護資格｜中級", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "実務者研修", body: "介護資格の中級レベル。この資格を持つ人材も紹介可能。<br><br><strong>重要ポイント</strong>：この研修を修了しないと、介護福祉士（国家資格）の受験資格が得られない。<br><br>働きながら取得するケースが多く、キャリアアップを目指す意識の高い人材が保有していることが多い。" },
-  { id: "ninchisho", label: "認知症介護基礎研修", badge: "法律上の義務", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "認知症介護 基礎研修", body: "<strong>無資格で入職した場合、入社後1年以内の受講が法律で義務づけられている研修。</strong><br><br>認知症の方への正しい対応・コミュニケーション技術を学ぶ内容。<br><br><strong>施設側の対応が必要なケース</strong>：紹介する外国人材がこの研修を未受講の場合、入社後に受講させる義務が施設側に発生する。" },
-  { id: "n1", label: "N1", badge: "最高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N1（日本語能力試験）", body: "JLPTの最高レベル。ほぼネイティブに近い日本語力。<br><br><strong>N1のレベル感</strong>：ニュース・新聞・専門的な文章も理解できる。敬語や微妙なニュアンスも把握できる。<br><br>介護現場では過剰スペックになるケースもあるが、施設側の安心感は最大。リーダー候補・将来の中核人材として訴求できる。" },
-  { id: "n2", label: "N2", badge: "高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N2（日本語能力試験）", body: "日常会話はもちろん、やや専門的な内容まで理解できるレベル。<br><br><strong>N2のレベル感</strong>：自然な速さの会話でもほぼ問題なく対応できる。敬語もある程度使いこなせる。<br><br>N3より一段上の安心感があり、施設からの評価が高い。N1ほど稀少でなく、紹介できる人材も一定数いる。" },
-  { id: "n3", label: "N3", badge: "施設が最も好むレベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N3（日本語能力試験）", body: "JLPTはN1〜N5の5段階でN1が最高レベル。<br><br><strong>N3のレベル感</strong>：日常会話が問題なくできる。利用者様やスタッフとのやり取りがスムーズ。<br><br>施設からの信頼・安心感が最も高く、採用後のトラブルも少ない傾向がある。" },
-  { id: "n4", label: "N4", badge: "特定技能の最低条件", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N4（日本語能力試験）", body: "<strong>特定技能ビザを取得するための最低条件となる日本語レベル。</strong><br><br><strong>N4のレベル感</strong>：ゆっくり・やさしい日本語であれば基本的な会話が可能。業務指示の理解には問題ない。<br><br>N3と比べると施設側の安心感はやや下がるため、トークでは「N3以上が多い」という点を強調するとよい。" },
   {
-    id: "toroku", label: "登録支援業務",
-    badge: "委託サービス内容", badgeBg: "#E1F5EE", badgeColor: "#085041",
-    salesTag: "委託費で弊社が全て代行", salesBg: "#E1F5EE", salesColor: "#085041",
-    title: "登録支援業務（とうろくしえんぎょうむ）",
-    body: "特定技能の外国人を雇う企業に<strong>法律で義務付けられている</strong>、外国人が日本でスムーズに生活・就労するためのサポート対応全般。<br><br>本来は施設側が対応しなければならないが、<strong>弊社が委託費（15,000円/月）で全て代行する。</strong><br><br><strong>具体的な業務内容（全10項目）</strong><ol><li><strong>事前ガイダンス</strong>：入国前に労働条件や日本の生活を説明</li><li><strong>出入国の送迎</strong>：入国・帰国時の空港〜住居間の送迎</li><li><strong>住居確保・契約支援</strong>：アパート探し・銀行口座・携帯・光熱費の契約サポート</li><li><strong>生活オリエンテーション</strong>：ゴミの出し方・交通ルール・買い物など日本の生活ルールを説明</li><li><strong>公的手続きの同行</strong>：市役所での住民登録・マイナンバー・税金手続きに同行・通訳</li><li><strong>日本語学習の機会提供</strong>：日本語教室の案内・学習教材の提供</li><li><strong>相談・苦情への対応</strong>：仕事や生活の悩みを母国語で受け付け、トラブルに対応</li><li><strong>日本人との交流促進</strong>：地域の行事・お祭りなどへの参加サポート</li><li><strong>転職支援</strong>：会社都合で解雇する場合などに次の就職先を探すサポート</li><li><strong>定期面談</strong>：3ヶ月に1回以上、外国人本人・直属上司と面談を実施</li></ol>"
+    label: "施設種別", dotColor: "#A32D2D",
+    terms: [
+      { id: "tokuyo", label: "特養", badge: "施設種別", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", salesTag: "ニーズ極めて高い", salesBg: "#FCEBEB", salesColor: "#A32D2D", title: "特養（とくよう）｜特別養護老人ホーム", body: "<strong>正式名称</strong>：特別養護老人ホーム<br><br>要介護度が高い方が入居し、看取りまで行う施設。<br><br><strong>営業での狙い目</strong>：常に激務で慢性的な人手不足。<strong>特定技能のニーズが極めて高く、最も成約につながりやすい施設種別。</strong>" },
+      { id: "roken", label: "老健", badge: "施設種別", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "夜勤負担が課題", salesBg: "#FAEEDA", salesColor: "#633806", title: "老健（ろうけん）｜介護老人保健施設", body: "<strong>正式名称</strong>：介護老人保健施設<br><br>病院退院後、自宅に戻るためのリハビリを行う施設。<br><br><strong>営業での狙い目</strong>：医療ケアが多く、夜勤の負担が大きい。夜勤対応できる人材を求めているケースが多い。" },
+      { id: "sakoju", label: "サ高住", badge: "施設種別", badgeBg: "#E1F5EE", badgeColor: "#085041", salesTag: "採用意欲が高い法人多い", salesBg: "#E1F5EE", salesColor: "#085041", title: "サ高住（さこうじゅう）｜サービス付き高齢者向け住宅", body: "<strong>正式名称</strong>：サービス付き高齢者向け住宅<br><br>比較的元気な高齢者が住む賃貸住宅型の施設。介護度は低め。<br><br><strong>営業での狙い目</strong>：施設展開のスピードが早く、複数拠点を持つ法人が多い。採用意欲が高く、まとめての紹介につながる可能性がある。" },
+      { id: "grouphome", label: "グループホーム", badge: "施設種別", badgeBg: "#EEEDFE", badgeColor: "#3C3489", salesTag: "日本語力が特に重視", salesBg: "#EEEDFE", salesColor: "#3C3489", title: "グループホーム｜認知症対応型共同生活介護", body: "<strong>正式名称</strong>：認知症対応型共同生活介護<br><br>認知症の方が少人数で共同生活を送る施設。<br><br><strong>営業での狙い目</strong>：コミュニケーション能力（日本語力）が特に重視される傾向にある。N3以上の人材を紹介できる点を強調すると刺さりやすい。" },
+      { id: "day", label: "デイ", badge: "施設種別", badgeBg: "#F1EFE8", badgeColor: "#444441", salesTag: "緊急度はやや低め", salesBg: "#F1EFE8", salesColor: "#5F5E5A", title: "デイ（サービス）｜通所介護", body: "<strong>正式名称</strong>：通所介護<br><br>日中のみ施設に通う形式の介護サービス。<br><br><strong>営業での狙い目</strong>：夜勤がないため、人員の緊急度は特養などと比べると一段落ちる場合が多い。ただし日中の人手不足は存在するため、提案の余地はある。" },
+    ]
   },
-  { id: "shokai", label: "紹介費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "紹介費", body: "人材を施設にご紹介する際の手数料（一括払い）。<br><br><strong>プランA（紹介＋委託）</strong>：150,000円<br><strong>プランB（紹介のみ）</strong>：200,000円<br><br>プランBは委託費が発生しない代わりに、紹介費が高くなる設計。" },
-  { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "登録支援業務を施設に代わって弊社が代行するための費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>代行内容</strong>：登録支援業務の全10項目（事前ガイダンス・住居確保・公的手続き同行・定期面談など）をすべて対応。施設側の負担をゼロにする。" },
   {
-    id: "apo", label: "アポの内容", star: true,
-    badge: "クロージング", badgeBg: "#FAEEDA", badgeColor: "#633806",
-    salesTag: "アポはどんな話するの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
-    title: "アポでどんな話をするか",
-    body: "アポの目的は<strong>「求人票の確認」と「候補人材のご提案」</strong>。<br><br>訪問前に施設の求人票を確認し、特定技能に合った人材を数名ピックアップしてから伺う。",
-    script: "「求人票って、特定技能用に作られてますかね？」<br><br>↓ <strong>作られていない・よくわからない場合</strong><br><br>「でしたら、詳細を少し教えていただければ、こちらでも良さそうな方を何人かピックアップしておきます。〇〇日の〇〇時はいかがでしょうか？」"
+    label: "介護資格", dotColor: "#533AB7",
+    terms: [
+      { id: "shoninsha", label: "初任者研修", badge: "介護資格｜入門", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "介護職員 初任者研修（旧：ヘルパー2級）", body: "介護資格の入門レベル。この資格を持つ人材も紹介可能。<br><br><strong>内容</strong>：入浴・食事・排泄介助などの基礎的な身体介護ができるようになる研修。<br><br>未経験から介護を始めた外国人材が最初に取得するケースが多い。" },
+      { id: "jitsumu", label: "実務者研修", badge: "介護資格｜中級", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "実務者研修", body: "介護資格の中級レベル。この資格を持つ人材も紹介可能。<br><br><strong>重要ポイント</strong>：この研修を修了しないと、介護福祉士（国家資格）の受験資格が得られない。<br><br>働きながら取得するケースが多く、キャリアアップを目指す意識の高い人材が保有していることが多い。" },
+      { id: "ninchisho", label: "認知症介護基礎研修", badge: "法律上の義務", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "認知症介護 基礎研修", body: "<strong>無資格で入職した場合、入社後1年以内の受講が法律で義務づけられている研修。</strong><br><br>認知症の方への正しい対応・コミュニケーション技術を学ぶ内容。<br><br><strong>施設側の対応が必要なケース</strong>：紹介する外国人材がこの研修を未受講の場合、入社後に受講させる義務が施設側に発生する。" },
+    ]
+  },
+  {
+    label: "日本語力（JLPT）", dotColor: "#185FA5",
+    terms: [
+      { id: "n1", label: "N1", badge: "最高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N1（日本語能力試験）", body: "JLPTの最高レベル。ほぼネイティブに近い日本語力。<br><br><strong>N1のレベル感</strong>：ニュース・新聞・専門的な文章も理解できる。敬語や微妙なニュアンスも把握できる。<br><br>介護現場では過剰スペックになるケースもあるが、施設側の安心感は最大。リーダー候補・将来の中核人材として訴求できる。" },
+      { id: "n2", label: "N2", badge: "高レベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N2（日本語能力試験）", body: "日常会話はもちろん、やや専門的な内容まで理解できるレベル。<br><br><strong>N2のレベル感</strong>：自然な速さの会話でもほぼ問題なく対応できる。敬語もある程度使いこなせる。<br><br>N3より一段上の安心感があり、施設からの評価が高い。" },
+      { id: "n3", label: "N3", badge: "施設が最も好むレベル", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N3（日本語能力試験）", body: "JLPTはN1〜N5の5段階でN1が最高レベル。<br><br><strong>N3のレベル感</strong>：日常会話が問題なくできる。利用者様やスタッフとのやり取りがスムーズ。<br><br>施設からの信頼・安心感が最も高く、採用後のトラブルも少ない傾向がある。" },
+      { id: "n4", label: "N4", badge: "特定技能の最低条件", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "JLPT N4（日本語能力試験）", body: "<strong>特定技能ビザを取得するための最低条件となる日本語レベル。</strong><br><br><strong>N4のレベル感</strong>：ゆっくり・やさしい日本語であれば基本的な会話が可能。業務指示の理解には問題ない。<br><br>N3と比べると施設側の安心感はやや下がるため、トークでは「N3以上が多い」という点を強調するとよい。" },
+    ]
+  },
+  {
+    label: "料金・費用", dotColor: "#0F6E56",
+    terms: [
+      { id: "shokai", label: "紹介費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "紹介費", body: "人材を施設にご紹介する際の手数料（一括払い）。<br><br><strong>プランA（紹介＋委託）</strong>：150,000円<br><strong>プランB（紹介のみ）</strong>：200,000円<br><br>プランBは委託費が発生しない代わりに、紹介費が高くなる設計。" },
+      { id: "itaku", label: "委託費", badge: "費用", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "委託費（いたくひ）", body: "登録支援業務を施設に代わって弊社が代行するための費用。<br><br><strong>金額</strong>：15,000円 / 月（プランAのみ）<br><br><strong>代行内容</strong>：登録支援業務の全10項目（事前ガイダンス・住居確保・公的手続き同行・定期面談など）をすべて対応。施設側の負担をゼロにする。" },
+      { id: "toroku", label: "登録支援業務", badge: "委託サービス内容", badgeBg: "#E1F5EE", badgeColor: "#085041", salesTag: "委託費で弊社が全て代行", salesBg: "#E1F5EE", salesColor: "#085041", title: "登録支援業務（とうろくしえんぎょうむ）", body: "特定技能の外国人を雇う企業に<strong>法律で義務付けられている</strong>、外国人が日本でスムーズに生活・就労するためのサポート対応全般。<br><br>本来は施設側が対応しなければならないが、<strong>弊社が委託費（15,000円/月）で全て代行する。</strong><br><br><strong>具体的な業務内容（全10項目）</strong><ol><li><strong>事前ガイダンス</strong>：入国前に労働条件や日本の生活を説明</li><li><strong>出入国の送迎</strong>：入国・帰国時の空港〜住居間の送迎</li><li><strong>住居確保・契約支援</strong>：アパート探し・銀行口座・携帯・光熱費の契約サポート</li><li><strong>生活オリエンテーション</strong>：ゴミの出し方・交通ルール・買い物など日本の生活ルールを説明</li><li><strong>公的手続きの同行</strong>：市役所での住民登録・マイナンバー・税金手続きに同行・通訳</li><li><strong>日本語学習の機会提供</strong>：日本語教室の案内・学習教材の提供</li><li><strong>相談・苦情への対応</strong>：仕事や生活の悩みを母国語で受け付け、トラブルに対応</li><li><strong>日本人との交流促進</strong>：地域の行事・お祭りなどへの参加サポート</li><li><strong>転職支援</strong>：会社都合で解雇する場合などに次の就職先を探すサポート</li><li><strong>定期面談</strong>：3ヶ月に1回以上、外国人本人・直属上司と面談を実施</li></ol>" },
+    ]
+  },
+  {
+    label: "営業", dotColor: "#BA7517",
+    terms: [
+      { id: "maxspec", label: "最高スペック人材", star: true, badge: "トークの起点", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "どんな人がいるの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
+        title: "紹介できる最高スペックの人材",
+        body: "「どんな人がいるんですか？」と聞かれたときの返し。最高スペックで話すことで施設側の期待値を最大化する。",
+        spec: [
+          { label: "日本語力", value: "JLPT N2" },
+          { label: "介護経験", value: "特養・老健" },
+          { label: "資格",     value: "実務者研修修了" },
+          { label: "在留期間", value: "最長5年" },
+        ],
+        script: "「たとえば弊社でご紹介できる方の中には、特養や老健での介護経験があり、実務者研修も修了済み、日本語はN2レベルという方もいらっしゃいます。最長5年間、即戦力として働いていただけます。」"
+      },
+      { id: "apo_naiyo", label: "アポの内容", star: true, badge: "クロージング", badgeBg: "#FAEEDA", badgeColor: "#633806", salesTag: "アポはどんな話するの？への返し", salesBg: "#FAEEDA", salesColor: "#633806",
+        title: "アポでどんな話をするか",
+        body: "アポの目的は<strong>「求人票の確認」と「候補人材のご提案」</strong>。<br><br>訪問前に施設の求人票を確認し、特定技能に合った人材を数名ピックアップしてから伺う。",
+        script: "「求人票って、特定技能用に作られてますかね？」<br><br>↓ <strong>作られていない・よくわからない場合</strong><br><br>「でしたら、詳細を少し教えていただければ、こちらでも良さそうな方を何人かピックアップしておきます。〇〇日の〇〇時はいかがでしょうか？」"
+      },
+    ]
+  },
+  {
+    label: "ヒアリング項目", dotColor: "#A32D2D",
+    terms: [
+      { id: "hearing_list", label: "ヒアリング項目", badge: "優先度順", badgeBg: "#FCEBEB", badgeColor: "#A32D2D",
+        title: "電話中のヒアリング項目（優先度順）",
+        hearingList: true, body: ""
+      }
+    ]
   },
 ];
 
 let activeId = null;
-const area = document.getElementById('chips-area');
+const wordArea = document.getElementById('word-area');
 const detailWrap = document.getElementById('detail-wrap');
 
-TERMS.forEach((item, i) => {
-  if (i > 0) {
-    const arrow = document.createElement('span');
-    arrow.className = 'arrow';
-    arrow.textContent = '›';
-    area.appendChild(arrow);
-  }
-  const chip = document.createElement('div');
-  chip.className = 'chip' + (item.star ? ' star' : '');
-  chip.id = 'chip-' + item.id;
-  const num = document.createElement('span');
-  num.className = 'step-num';
-  num.textContent = i + 1;
-  chip.appendChild(num);
-  chip.appendChild(document.createTextNode(item.label));
-  chip.addEventListener('click', () => toggle(item));
-  area.appendChild(chip);
+GROUPS.forEach(group => {
+  const gl = document.createElement('div');
+  gl.className = 'group-label';
+  gl.textContent = group.label;
+  wordArea.appendChild(gl);
+  const chips = document.createElement('div');
+  chips.className = 'chips';
+  group.terms.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (item.star ? ' star' : '');
+    chip.id = 'chip-' + item.id;
+    const dot = document.createElement('span');
+    dot.className = 'chip-dot';
+    dot.style.background = group.dotColor;
+    chip.appendChild(dot);
+    chip.appendChild(document.createTextNode(item.label));
+    chip.addEventListener('click', () => toggleDetail(item));
+    chips.appendChild(chip);
+  });
+  wordArea.appendChild(chips);
 });
 
-function toggle(item) {
+function toggleDetail(item) {
   if (activeId === item.id) { closeDetail(); return; }
   activeId = item.id;
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   document.getElementById('chip-' + item.id).classList.add('active');
   document.getElementById('d-title').textContent = item.title;
-
   const ba = document.getElementById('d-badge-area');
   ba.innerHTML = '';
   if (item.salesTag) {
     const st = document.createElement('span');
     st.className = 'sales-tag';
     st.textContent = '営業ポイント：' + item.salesTag;
-    st.style.background = item.salesBg;
-    st.style.color = item.salesColor;
-    ba.appendChild(st);
-    ba.appendChild(document.createElement('br'));
+    st.style.background = item.salesBg; st.style.color = item.salesColor;
+    ba.appendChild(st); ba.appendChild(document.createElement('br'));
   }
   if (item.badge) {
     const b = document.createElement('span');
     b.className = 'd-badge';
     b.textContent = item.badge;
-    b.style.background = item.badgeBg;
-    b.style.color = item.badgeColor;
+    b.style.background = item.badgeBg; b.style.color = item.badgeColor;
     ba.appendChild(b);
   }
-
   const body = document.getElementById('d-body');
   body.innerHTML = item.body;
-
+  if (item.hearingList) {
+    const list = document.createElement('div');
+    list.className = 'hearing-list';
+    [
+      { num:'1', color:'#A32D2D', label:'採用温度感', note:'採用予定があるか・特定技能の枠が何枠空いているか' },
+      { num:'2', color:'#888', label:'担当者名' },
+      { num:'3', color:'#888', label:'メールアドレス' },
+      { num:'4', color:'#888', label:'希望国籍' },
+      { num:'5', color:'#888', label:'希望日本語レベル' },
+      { num:'6', color:'#888', label:'介護経験有無' },
+      { num:'7', color:'#888', label:'寮の有無' },
+    ].forEach((hi, i) => {
+      if (i === 1) {
+        const w = document.createElement('div'); w.className = 'hearing-wall';
+        w.textContent = '── ここより下は優先度低め ──'; list.appendChild(w);
+      }
+      const row = document.createElement('div'); row.className = 'hearing-item';
+      row.innerHTML = '<span class="hearing-num" style="background:' + hi.color + '">' + hi.num + '</span><div><strong>' + hi.label + '</strong>' + (hi.note ? '<br><span style="font-size:13px;color:#777;">' + hi.note + '</span>' : '') + '</div>';
+      list.appendChild(row);
+    });
+    body.appendChild(list);
+  }
   if (item.spec) {
-    const card = document.createElement('div');
-    card.className = 'spec-card';
+    const card = document.createElement('div'); card.className = 'spec-card';
     item.spec.forEach(s => {
-      const si = document.createElement('div');
-      si.className = 'spec-item';
+      const si = document.createElement('div'); si.className = 'spec-item';
       si.innerHTML = '<div class="spec-label">' + s.label + '</div><div class="spec-value">' + s.value + '</div>';
       card.appendChild(si);
     });
     body.appendChild(card);
   }
-
   if (item.script) {
-    const sb = document.createElement('div');
-    sb.className = 'script-box';
+    const sb = document.createElement('div'); sb.className = 'script-box';
     sb.innerHTML = '<div class="script-label">トーク例</div>' + item.script;
     body.appendChild(sb);
   }
-
   if (item.countries) {
-    const row = document.createElement('div');
-    row.className = 'country-row';
+    const row = document.createElement('div'); row.className = 'country-row';
     item.countries.forEach(c => {
-      const pill = document.createElement('div');
-      pill.className = 'country-pill';
+      const pill = document.createElement('div'); pill.className = 'country-pill';
       pill.innerHTML = '<span style="font-size:20px;line-height:1">' + c.flag + '</span><div><div class="country-name">' + c.name + '</div><div class="country-note">' + c.note + '</div></div>';
       row.appendChild(pill);
     });
     body.appendChild(row);
   }
-
+  // move detail card right after the clicked chip's group
+  const chipEl = document.getElementById('chip-' + item.id);
+  const chipsDiv = chipEl.parentElement;
+  chipsDiv.parentNode.insertBefore(detailWrap, chipsDiv.nextSibling);
   detailWrap.classList.add('open');
-  setTimeout(() => detailWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 }
-
 function closeDetail() {
-  activeId = null;
-  detailWrap.classList.remove('open');
+  activeId = null; detailWrap.classList.remove('open');
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
 }
 
+// ════════════════════════════════════════════════
+// ② テレアポリスト用語（1チップ）
+// ════════════════════════════════════════════════
+const TELE_TERM = {
+  id: "tele", label: "テレアポリスト用語",
+  badge: "ステータス一覧", badgeBg: "#FCEBEB", badgeColor: "#A32D2D",
+  title: "テレアポリスト用語",
+  items: [
+    { dot: "#C0392B", label: "不通",         body: "電話をかけたが、繋がらなかった状態。留守電・話し中・無応答など。" },
+    { dot: "#888",    label: "受付ブロック",  body: "受付の段階で担当者に繋いでもらえず切られた状態。「担当者不在」「必要なければお断りしています」など。" },
+    { dot: "#D4A017", label: "有効接触",      body: "採用担当者に電話を繋いでもらえた状態。ここから本番のトークが始まる。" },
+    { dot: "#922B21", label: "ヒアリング",    body: "担当者と話せた上で、外国人雇用の有無・採用募集状況を確認できた状態。" },
+    { dot: "#888",    label: "プレ",          body: "外国人商品（特定技能）の訴求を実施した状態。紹介費15万円・N3・経験ありなどの情報を伝えた段階。" },
+    { dot: "#888",    label: "クロージング",  body: "アポの打診を行った状態。日程調整を提案した段階。" },
+    { dot: "#1E8449", label: "アポ獲得",      body: "日程調整まで完了した状態。具体的な日時が確定し、商談の約束が取れた。" },
+    { dot: "#1E8449", label: "求人獲得",      body: "電話口で求人票の情報まで取得し、商談なしで完結した状態。最もスピーディーに案件化できるケース。" },
+  ]
+};
+
+const teleChips = document.getElementById('tele-chips');
+const teleWrap = document.getElementById('tele-wrap');
+let teleActive = false;
+
+const teleChip = document.createElement('div');
+teleChip.className = 'chip';
+teleChip.id = 'chip-tele';
+const teleDot = document.createElement('span');
+teleDot.className = 'chip-dot';
+teleDot.style.background = '#C0392B';
+teleChip.appendChild(teleDot);
+teleChip.appendChild(document.createTextNode(TELE_TERM.label));
+teleChip.addEventListener('click', () => {
+  if (teleActive) { closeTele(); return; }
+  teleActive = true;
+  teleChip.classList.add('active');
+  document.getElementById('t-title').textContent = TELE_TERM.title;
+  const tba = document.getElementById('t-badge-area');
+  tba.innerHTML = '';
+  const b = document.createElement('span'); b.className = 'd-badge';
+  b.textContent = TELE_TERM.badge; b.style.background = TELE_TERM.badgeBg; b.style.color = TELE_TERM.badgeColor;
+  tba.appendChild(b);
+  const tbody = document.getElementById('t-body');
+  tbody.innerHTML = '';
+  const list = document.createElement('div'); list.className = 'tele-list';
+  TELE_TERM.items.forEach(item => {
+    const row = document.createElement('div'); row.className = 'tele-item';
+    row.innerHTML = '<span class="tele-dot" style="background:' + item.dot + '"></span><div><strong>' + item.label + '</strong><br><span style="font-size:13px;color:#777;">' + item.body + '</span></div>';
+    list.appendChild(row);
+  });
+  tbody.appendChild(list);
+  teleWrap.classList.add('open');
+});
+teleChips.appendChild(teleChip);
+
+function closeTele() {
+  teleActive = false; teleWrap.classList.remove('open');
+  teleChip.classList.remove('active');
+}
+
+// ════════════════════════════════════════════════
+// ③ アポ後のアクション
+// ════════════════════════════════════════════════
 const ACTIONS = [
-  {
-    id: "status", label: "リスト更新",
-    badge: "テレアポリスト", badgeBg: "#E1F5EE", badgeColor: "#085041",
-    title: "テレアポリストのステータス更新",
-    body: "テレアポリストを開き、今回アポを獲得した施設のステータスを<strong>「アポ獲得」</strong>に変更する。"
-  },
-  {
-    id: "crm", label: "CRM入力",
-    badge: "顧客管理", badgeBg: "#E6F1FB", badgeColor: "#0C447C",
-    title: "顧客管理CRM入力",
-    body: "テレアポ中に聞いた情報をCRMに入力する。<br><br><strong>入力項目</strong><br>・会社名<br>・担当者名<br>・メールアドレス<br>・電話番号<br>・アポ日時<br>・その他メモ（ニーズ・懸念点など）"
-  },
-  {
-    id: "calendar", label: "カレンダー登録",
-    badge: "スケジュール", badgeBg: "#EEEDFE", badgeColor: "#3C3489",
-    title: "カレンダーに商談内容を記録",
-    body: "Googleカレンダーにアポの予定を登録し、以下のフォーマットで商談メモを記載する。",
-    format: `＜ランク＞
-C　会社としては人を増やす余地がある。それよりはTanceeが信頼に足るのかどうかを重要視している。
-
-＜先方について＞
-047-303-7711　担当：マツバラ様
-
-＜どんな商談を期待しているか（アポくれた理由）＞
-信頼をすごく気にしていて、何かあった時にすぐに対応してくれるのか。紹介料15万円でそこをどのようにして機能させているのか。を気にしている。
-
-＜前提＞
-webページも見られていて、実績、信頼を重要視している。
-
-＜人材要件＞
-あまり聞けてないが、会社としては拡大の余地ある。
-
-＜今後について＞
-信頼と、実績で他社と差別化できると良さそう。`
-  },
-  {
-    id: "slack", label: "Slack報告",
-    badge: "チーム共有", badgeBg: "#FAEEDA", badgeColor: "#633806",
-    title: "Slackでアポ獲得を報告",
-    body: "アポ獲得をSlackで報告する。以下のフォーマットを参考に。",
-    format: `2026/04/15 11:00- オンラインにて特定技能のアポ獲得しました！
-今度は30分時間もらえました笑
-ランクはCですね。求人はもらえるかどうか怪しいです。今年は充足してるとのことだったので。
-会社名：医療法人泰一会 介護老人保健施設はつかり　ヒダカ様`
-  },
-  {
-    id: "meet", label: "Meetリンク取得",
-    badge: "オンライン商談", badgeBg: "#E1F5EE", badgeColor: "#085041",
-    title: "Google MeetリンクをまさやさんにもらうMTGリンクを取得する",
-    body: "<strong>まさやさんにGoogle Meetのリンクを取得してもらう。</strong><br><br>取得したリンクはメール送信時に使用する。"
-  },
-  {
-    id: "mail", label: "メール送信",
-    badge: "お礼メール", badgeBg: "#FCEBEB", badgeColor: "#A32D2D",
-    title: "アポのお礼メールを送信",
-    body: "Meetリンクをセットしてアポのお礼メールを送る。以下のフォーマットを参考に。",
-    format: `件名：【お礼とご連絡】4/16（木）11:00〜のお打ち合わせについて
-
-医療法人泰一会 介護老人保健施設はつかり ヒダカ様
-
-お世話になります。株式会社Tanceeの三枝と申します。
-
-先ほどはお忙しい中、お電話にてお時間をいただき誠にありがとうございました。
-お電話口でもお話しさせていただいた通り、下記の日程にてお打ち合わせさせていただきたく存じます。
-詳細を以下の通り設定いたしましたので、ご確認の程よろしくお願いいたします。
-
-■日時　4月16日（木）11:00〜
-■ミーティングURL　https://meet.google.com/xxx-xxxx-xxx
-
-当日は何卒よろしくお願い申し上げます。
-株式会社 Tancee　三枝`
-  },
+  { id: "rank", label: "商談ランク", badge: "アポ後判断", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "商談ランクの定義", body: "アポ獲得後、カレンダーやCRMに記録するランク。電話口でのヒアリング内容をもとに判断する。<br><br><div style='display:flex;flex-direction:column;gap:0.6rem;margin-top:0.5rem;'><div style='display:flex;gap:10px;align-items:flex-start;'><span style='min-width:24px;height:24px;border-radius:50%;background:#A32D2D;color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;'>A</span><div><strong>特定技能の募集をしており、急ぎ採用活動を進めたい。</strong></div></div><div style='display:flex;gap:10px;align-items:flex-start;'><span style='min-width:24px;height:24px;border-radius:50%;background:#BA7517;color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;'>B</span><div><strong>特定技能の募集をしている。</strong></div></div><div style='display:flex;gap:10px;align-items:flex-start;'><span style='min-width:24px;height:24px;border-radius:50%;background:#185FA5;color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;'>C</span><div><strong>特定技能でいい人がいれば採用検討はする。</strong></div></div><div style='display:flex;gap:10px;align-items:flex-start;'><span style='min-width:24px;height:24px;border-radius:50%;background:#888;color:#fff;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;'>D</span><div><strong>現時点では一切、特定技能の募集していない。</strong></div></div></div>" },
+  { id: "status", label: "リスト更新", badge: "テレアポリスト", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "テレアポリストのステータス更新", body: "テレアポリストを開き、今回アポを獲得した施設のステータスを<strong>「アポ獲得」</strong>に変更する。" },
+  { id: "crm", label: "CRM入力", badge: "顧客管理", badgeBg: "#E6F1FB", badgeColor: "#0C447C", title: "顧客管理CRM入力", body: "テレアポ中に聞いた情報をCRMに入力する。<br><br><strong>入力項目</strong><br>・会社名<br>・担当者名<br>・メールアドレス<br>・電話番号<br>・アポ日時<br>・その他メモ（ニーズ・懸念点など）" },
+  { id: "calendar", label: "カレンダー登録", badge: "スケジュール", badgeBg: "#EEEDFE", badgeColor: "#3C3489", title: "カレンダーに商談内容を記録", body: "Googleカレンダーにアポの予定を登録し、以下のフォーマットで商談メモを記載する。",
+    format: `＜ランク＞\nC　会社としては人を増やす余地がある。それよりはTanceeが信頼に足るのかどうかを重要視している。\n\n＜先方について＞\n047-303-7711　担当：マツバラ様\n\n＜どんな商談を期待しているか（アポくれた理由）＞\n信頼をすごく気にしていて、何かあった時にすぐに対応してくれるのか。紹介料15万円でそこをどのようにして機能させているのか。を気にしている。\n\n＜前提＞\nwebページも見られていて、実績、信頼を重要視している。\n\n＜人材要件＞\nあまり聞けてないが、会社としては拡大の余地ある。\n\n＜今後について＞\n信頼と、実績で他社と差別化できると良さそう。` },
+  { id: "slack", label: "Slack報告", badge: "チーム共有", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "Slackでアポ獲得を報告", body: "アポ獲得をSlackで報告する。以下のフォーマットを参考に。",
+    format: `2026/04/15 11:00- オンラインにて特定技能のアポ獲得しました！\n今度は30分時間もらえました笑\nランクはCですね。求人はもらえるかどうか怪しいです。今年は充足してるとのことだったので。\n会社名：医療法人泰一会 介護老人保健施設はつかり　ヒダカ様` },
+  { id: "meet", label: "Meetリンク取得", badge: "オンライン商談", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "Google Meetリンクを取得する", body: "<strong>まさやさんにGoogle Meetのリンクを取得してもらう。</strong><br><br>取得したリンクはメール送信時に使用する。" },
+  { id: "mail", label: "メール送信", badge: "お礼メール", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", title: "アポのお礼メールを送信", body: "Meetリンクをセットしてアポのお礼メールを送る。以下のフォーマットを参考に。",
+    format: `件名：【お礼とご連絡】4/16（木）11:00〜のお打ち合わせについて\n\nお世話になっております。\n株式会社Tanceeの清水です。\n\n先程はお電話ありがとうございました。\n貴施設に少しでも貢献できるよう、良い人材をご提案いたします。\n\n下記、オンラインでのお打ち合わせの日時とリンクになります。\nーーーーーーーーーー\n◆日時4月7日（火）14時〜\n◆オンラインリンク\nxxxxxxxxxxxxxxxxxxxx\n◆備考・紹介料15万円（税抜）・支援費1.5万円/月（税抜）\n※ビザ申請は行政書士依頼の実費\nーーーーーーーーーー\n万が一ご都合がつかなくなった場合は、その旨お伝えください。\n当日どうぞよろしくお願いいたします。\n清水` },
 ];
 
 let activeActionId = null;
@@ -365,17 +494,13 @@ const actionDetailWrap = document.getElementById('action-detail-wrap');
 
 ACTIONS.forEach((item, i) => {
   if (i > 0) {
-    const arrow = document.createElement('span');
-    arrow.className = 'arrow';
-    arrow.textContent = '›';
+    const arrow = document.createElement('span'); arrow.className = 'arrow'; arrow.textContent = '›';
     actionArea.appendChild(arrow);
   }
   const chip = document.createElement('div');
   chip.className = 'action-chip';
   chip.id = 'action-chip-' + item.id;
-  const num = document.createElement('span');
-  num.className = 'action-num';
-  num.textContent = i + 1;
+  const num = document.createElement('span'); num.className = 'action-num'; num.textContent = i + 1;
   chip.appendChild(num);
   chip.appendChild(document.createTextNode(item.label));
   chip.addEventListener('click', () => toggleAction(item));
@@ -388,35 +513,24 @@ function toggleAction(item) {
   document.querySelectorAll('.action-chip').forEach(c => c.classList.remove('active'));
   document.getElementById('action-chip-' + item.id).classList.add('active');
   document.getElementById('a-title').textContent = item.title;
-
   const ba = document.getElementById('a-badge-area');
   ba.innerHTML = '';
   if (item.badge) {
-    const b = document.createElement('span');
-    b.className = 'd-badge';
-    b.textContent = item.badge;
-    b.style.background = item.badgeBg;
-    b.style.color = item.badgeColor;
+    const b = document.createElement('span'); b.className = 'd-badge';
+    b.textContent = item.badge; b.style.background = item.badgeBg; b.style.color = item.badgeColor;
     ba.appendChild(b);
   }
-
   const body = document.getElementById('a-body');
   body.innerHTML = item.body;
-
   if (item.format) {
-    const fb = document.createElement('div');
-    fb.className = 'format-box';
+    const fb = document.createElement('div'); fb.className = 'format-box';
     fb.innerHTML = '<div class="format-label">フォーマット</div>' + item.format.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
     body.appendChild(fb);
   }
-
   actionDetailWrap.classList.add('open');
-  setTimeout(() => actionDetailWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 }
-
 function closeAction() {
-  activeActionId = null;
-  actionDetailWrap.classList.remove('open');
+  activeActionId = null; actionDetailWrap.classList.remove('open');
   document.querySelectorAll('.action-chip').forEach(c => c.classList.remove('active'));
 }
 </script>
