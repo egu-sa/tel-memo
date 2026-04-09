@@ -484,8 +484,8 @@ const ACTIONS = [
   { id: "slack", label: "Slack報告", badge: "チーム共有", badgeBg: "#FAEEDA", badgeColor: "#633806", title: "Slackでアポ獲得を報告", body: "アポ獲得をSlackで報告する。以下のフォーマットを参考に。",
     format: `2026/04/15 11:00- オンラインにて特定技能のアポ獲得しました！\n今度は30分時間もらえました笑\nランクはCですね。求人はもらえるかどうか怪しいです。今年は充足してるとのことだったので。\n会社名：医療法人泰一会 介護老人保健施設はつかり　ヒダカ様` },
   { id: "meet", label: "Meetリンク取得", badge: "オンライン商談", badgeBg: "#E1F5EE", badgeColor: "#085041", title: "Google Meetリンクを取得する", body: "<strong>まさやさんにGoogle Meetのリンクを取得してもらう。</strong><br><br>取得したリンクはメール送信時に使用する。" },
-  { id: "mail", label: "メール送信", badge: "お礼メール", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", title: "アポのお礼メールを送信", body: "Meetリンクをセットしてアポのお礼メールを送る。以下のフォーマットを参考に。",
-    format: `件名：【お礼とご連絡】4/16（木）11:00〜のお打ち合わせについて\n\nお世話になっております。\n株式会社Tanceeの清水です。\n\n先程はお電話ありがとうございました。\n貴施設に少しでも貢献できるよう、良い人材をご提案いたします。\n\n下記、オンラインでのお打ち合わせの日時とリンクになります。\nーーーーーーーーーー\n◆日時4月7日（火）14時〜\n◆オンラインリンク\nxxxxxxxxxxxxxxxxxxxx\n◆備考・紹介料15万円（税抜）・支援費1.5万円/月（税抜）\n※ビザ申請は行政書士依頼の実費\nーーーーーーーーーー\n万が一ご都合がつかなくなった場合は、その旨お伝えください。\n当日どうぞよろしくお願いいたします。\n清水` },
+  { id: "mail", label: "メール送信", badge: "お礼メール", badgeBg: "#FCEBEB", badgeColor: "#A32D2D", title: "アポのお礼メールを送信", body: 'Meetリンクをセットしてアポのお礼メールを送る。以下のフォーマットを参考に。<br><br><div style="background:#FEF3E2;border:1px solid #F5A623;border-radius:8px;padding:10px 14px;font-size:13px;color:#633806;"><strong>CCに必ず入れること</strong><br><span style="font-size:15px;font-weight:600;letter-spacing:0.02em;">info@tancee.co.jp</span></div>',
+    format: `件名：【お礼とご連絡】4/16（木）11:00〜のお打ち合わせについて\n\n特別養護老人ホームoo\noo様\n\nお世話になっております。\n株式会社Tanceeの清水です。\n\n先程はお電話ありがとうございました。\n貴施設に少しでも貢献できるよう、良い人材をご提案いたします。\n\n下記、オンラインでのお打ち合わせの日時とリンクになります。\nーーーーーーーーーー\n◆日時4月7日（火）14時〜\n◆オンラインリンク\nxxxxxxxxxxxxxxxxxxxx\n◆備考\n・紹介料15万円（税抜）\n・支援費1.5万円/月（税抜）\n※ビザ申請は行政書士依頼の実費\nーーーーーーーーーー\n万が一ご都合がつかなくなった場合は、その旨お伝えください。\n当日どうぞよろしくお願いいたします。\n清水` },
 ];
 
 let activeActionId = null;
